@@ -1,0 +1,14 @@
+{
+  "name": "local-dj-server",
+  "version": "0.0.1",
+  "description": "A simple Node.js server for hosting a local dj player",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.15.0"
+  },
+  "author": "Brian Sator",
+  "license": "MIT"
+}
