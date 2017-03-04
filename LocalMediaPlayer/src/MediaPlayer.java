@@ -1,5 +1,3 @@
-package MediaPlayer;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -19,8 +17,6 @@ import javax.swing.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-// import javax.websocket.*;
-
 
 public class MediaPlayer implements LineListener{
 	boolean playCompleted;
@@ -30,7 +26,7 @@ public class MediaPlayer implements LineListener{
 	private JLabel currentlyPlayingLabel;
 	private JPanel controlPanel;
 
-    final WebSocketClientEndpoint clientEndpoint;
+    static WebSocketClientEndpoint clientEndpoint;
 
 	void play(String audioFilePath){
 		File audioFile = new File(audioFilePath);
@@ -67,7 +63,7 @@ public class MediaPlayer implements LineListener{
 	/**
      * Listens to the START and STOP events of the audio line.
      */
-    @Override
+  
     public void update(LineEvent event) {
         LineEvent.Type type = event.getType();
          
@@ -110,11 +106,11 @@ public class MediaPlayer implements LineListener{
     }
 
     public static void main(String[] args){
-    	MediaPlayer mediaPlayer = new MediaPlayer();
+    	final MediaPlayer mediaPlayer = new MediaPlayer();
     	mediaPlayer.MediaPlayerWindow();
 
     	try {
-    		clientEndpoint = new WebSocketClientEndpoint(new URI("wss://76.126.212.226:8080/mobileapp"));
+    		clientEndpoint = new WebSocketClientEndpoint(new URI("wss://10.0.0.25:8080/mobileapp"));
     		
     		//addlistener
     		clientEndpoint.addMessageHandler(new WebSocketClientEndpoint.MessageHandler(){
@@ -125,8 +121,6 @@ public class MediaPlayer implements LineListener{
     		});
     		// send message to websocket
             //clientEndPoint.sendMessage("{'event':'addChannel','channel':'ok_btccny_ticker'}");
-    	} catch(InterruptedException e){
-    		System.err.println("InterruptedException exception: " + e.getMessage());
     	} catch(URISyntaxException e){
     		System.err.println("URISyntaxException exception: " + e.getMessage());
     	}
