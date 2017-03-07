@@ -26,6 +26,7 @@ public class WebSocketClientEndpoint {
     public void onOpen(Session userSession) {
         System.out.println("opening websocket");
         this.userSession = userSession;
+//        this.userSession.getAsyncRemote().sendText("next-song");
     }
 
     @OnClose
